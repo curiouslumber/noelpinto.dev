@@ -18,6 +18,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -190,7 +191,7 @@ const Navbar = () => {
                 }
               }}
             >
-              Noel Pinto
+              NP
             </Typography>
 
             {/* Desktop Navigation */}
@@ -271,8 +272,10 @@ const Navbar = () => {
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
               <Button
                 variant="contained"
-                component={Link}
-                to="/contact"
+                component="a"
+                href="https://github.com/curiouslumber"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{
                   scale: 1.05,
                   boxShadow: '0 10px 30px -5px rgba(255, 255, 255, 0.1)'
@@ -311,8 +314,9 @@ const Navbar = () => {
                   },
                   transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
+                startIcon={<GitHubIcon />}
               >
-                Get in Touch
+                GitHub Repo
               </Button>
             </Box>
           </Toolbar>
@@ -429,11 +433,13 @@ const Navbar = () => {
             </List>
 
             <Button
-              component={Link}
-              to="/contact"
+              component="a"
+              href="https://github.com/curiouslumber"
+              target="_blank"
+              rel="noopener noreferrer"
               variant="contained"
               fullWidth
-              onClick={handleDrawerToggle}
+              startIcon={<GitHubIcon />}
               sx={{
                 py: 1.5,
                 borderRadius: '12px',
@@ -446,7 +452,7 @@ const Navbar = () => {
                 }
               }}
             >
-              Get in Touch
+              GitHub Repo
             </Button>
           </Box>
         </Drawer>
