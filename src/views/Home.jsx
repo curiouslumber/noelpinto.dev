@@ -5,6 +5,7 @@ import bg from "../assets/images/background.jpg";
 import Navbar from "../components/Navbar";
 import GlassBox from "../components/GlassBox";
 import { Code, PhoneAndroid, Brush } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 // Animation keyframes
 const float = keyframes`
@@ -19,6 +20,8 @@ const fadeIn = keyframes`
 `;
 
 const Home = () => {
+    const navigate = useNavigate();
+    
     return (
         <Box
             sx={{
@@ -107,7 +110,9 @@ const Home = () => {
                             <Button
                                 variant="contained"
                                 size="large"
-                                component={motion.button}
+                                component="a"
+                                href="https://github.com/curiouslumber"
+                                target="_blank"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 sx={{
@@ -134,6 +139,7 @@ const Home = () => {
                                 component={motion.button}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
+                                onClick={() => navigate('/contact')}
                                 sx={{
                                     border: '1px solid rgba(255, 255, 255, 0.3)',
                                     borderRadius: '12px',

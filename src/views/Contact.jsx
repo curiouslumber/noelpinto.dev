@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Box, Typography, TextField, Button, CircularProgress, Alert } from "@mui/material";
+import { Box, Typography, TextField, Button, CircularProgress, Alert, Snackbar } from "@mui/material";
 import { motion } from "framer-motion";
 import bg from "../assets/images/background.jpg";
 import Navbar from "../components/Navbar";
 import GlassBox from "../components/GlassBox";
+import ContactService from "../services/contactService";
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -12,7 +13,12 @@ const Contact = () => {
         message: ''
     });
     const [loading, setLoading] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState({ success: false, message: '' });
+    const [errors, setErrors] = useState({});
+    const [submitStatus, setSubmitStatus] = useState({ 
+        open: false,
+        success: false, 
+        message: '' 
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,23 +28,50 @@ const Contact = () => {
         }));
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.name.trim()) newErrors.name = 'Name is required';
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email address';
+        }
+        if (!formData.message.trim()) newErrors.message = 'Message is required';
+        
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleCloseSnackbar = () => {
+        setSubmitStatus(prev => ({ ...prev, open: false }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        if (!validateForm()) return;
+        
         setLoading(true);
         
-        // Simulate form submission
         try {
-            // Replace with actual form submission logic
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            await ContactService.submitContactForm(formData);
+            
             setSubmitStatus({
+                open: true,
                 success: true,
-                message: 'Your message has been sent successfully! I\'ll get back to you soon.'
+                message: 'Your message has been sent successfully!\nI\'ll get back to you soon.'
             });
+            
+            // Reset form
             setFormData({ name: '', email: '', message: '' });
+            setErrors({});
+            
         } catch (error) {
+            console.error('Form submission error:', error);
             setSubmitStatus({
+                open: true,
                 success: false,
-                message: 'Something went wrong. Please try again later.'
+                message: error.message || 'Something went wrong. Please try again later.'
             });
         } finally {
             setLoading(false);
@@ -126,19 +159,26 @@ const Contact = () => {
                         Get In Touch
                     </Typography>
 
-                    {submitStatus.message && (
+                    <Snackbar
+                        open={submitStatus.open}
+                        autoHideDuration={6000}
+                        onClose={handleCloseSnackbar}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    >
                         <Alert 
+                            onClose={handleCloseSnackbar}
                             severity={submitStatus.success ? 'success' : 'error'}
                             sx={{ 
-                                mb: 3,
-                                background: 'rgba(255, 255, 255, 0.1)',
+                                background: 'rgba(0, 0, 0, 0.8)',
+                                backdropFilter: 'blur(8px)',
                                 color: 'white',
-                                '& .MuiAlert-icon': { color: 'white' }
+                                '& .MuiAlert-icon': { color: 'white' },
+                                '& .MuiAlert-message': { color: 'white' }
                             }}
                         >
                             {submitStatus.message}
                         </Alert>
-                    )}
+                    </Snackbar>
 
                     <Box component="form" onSubmit={handleSubmit} noValidate>
                         <TextField
@@ -149,28 +189,33 @@ const Contact = () => {
                             label="Your Name"
                             value={formData.name}
                             onChange={handleChange}
+                            error={!!errors.name}
+                            helperText={errors.name}
                             required
                             variant="outlined"
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     color: 'white',
                                     '& fieldset': {
-                                        borderColor: 'rgba(255, 255, 255, 0.2)',
+                                        borderColor: errors.name ? 'error.main' : 'rgba(255, 255, 255, 0.2)',
                                     },
                                     '&:hover fieldset': {
-                                        borderColor: 'rgba(255, 255, 255, 0.3)',
+                                        borderColor: errors.name ? 'error.main' : 'rgba(255, 255, 255, 0.3)',
                                     },
                                     '&.Mui-focused fieldset': {
-                                        borderColor: 'rgba(255, 255, 255, 0.5)',
+                                        borderColor: errors.name ? 'error.main' : 'rgba(255, 255, 255, 0.5)',
                                     },
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     borderRadius: '8px',
                                 },
                                 '& .MuiInputLabel-root': {
-                                    color: 'rgba(255, 255, 255, 0.7)',
+                                    color: errors.name ? 'error.light' : 'rgba(255, 255, 255, 0.7)',
                                 },
                                 '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'rgba(255, 255, 255, 0.9)',
+                                    color: errors.name ? 'error.light' : 'rgba(255, 255, 255, 0.9)',
+                                },
+                                '& .MuiFormHelperText-root': {
+                                    color: errors.name ? 'error.light' : 'rgba(255, 255, 255, 0.5)',
                                 },
                             }}
                         />
@@ -184,28 +229,33 @@ const Contact = () => {
                             type="email"
                             value={formData.email}
                             onChange={handleChange}
+                            error={!!errors.email}
+                            helperText={errors.email}
                             required
                             variant="outlined"
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     color: 'white',
                                     '& fieldset': {
-                                        borderColor: 'rgba(255, 255, 255, 0.2)',
+                                        borderColor: errors.email ? 'error.main' : 'rgba(255, 255, 255, 0.2)',
                                     },
                                     '&:hover fieldset': {
-                                        borderColor: 'rgba(255, 255, 255, 0.3)',
+                                        borderColor: errors.email ? 'error.main' : 'rgba(255, 255, 255, 0.3)',
                                     },
                                     '&.Mui-focused fieldset': {
-                                        borderColor: 'rgba(255, 255, 255, 0.5)',
+                                        borderColor: errors.email ? 'error.main' : 'rgba(255, 255, 255, 0.5)',
                                     },
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     borderRadius: '8px',
                                 },
                                 '& .MuiInputLabel-root': {
-                                    color: 'rgba(255, 255, 255, 0.7)',
+                                    color: errors.email ? 'error.light' : 'rgba(255, 255, 255, 0.7)',
                                 },
                                 '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'rgba(255, 255, 255, 0.9)',
+                                    color: errors.email ? 'error.light' : 'rgba(255, 255, 255, 0.9)',
+                                },
+                                '& .MuiFormHelperText-root': {
+                                    color: errors.email ? 'error.light' : 'rgba(255, 255, 255, 0.5)',
                                 },
                             }}
                         />
@@ -218,6 +268,8 @@ const Contact = () => {
                             label="Your Message"
                             value={formData.message}
                             onChange={handleChange}
+                            error={!!errors.message}
+                            helperText={errors.message}
                             required
                             multiline
                             rows={4}
@@ -226,22 +278,25 @@ const Contact = () => {
                                 '& .MuiOutlinedInput-root': {
                                     color: 'white',
                                     '& fieldset': {
-                                        borderColor: 'rgba(255, 255, 255, 0.2)',
+                                        borderColor: errors.message ? 'error.main' : 'rgba(255, 255, 255, 0.2)',
                                     },
                                     '&:hover fieldset': {
-                                        borderColor: 'rgba(255, 255, 255, 0.3)',
+                                        borderColor: errors.message ? 'error.main' : 'rgba(255, 255, 255, 0.3)',
                                     },
                                     '&.Mui-focused fieldset': {
-                                        borderColor: 'rgba(255, 255, 255, 0.5)',
+                                        borderColor: errors.message ? 'error.main' : 'rgba(255, 255, 255, 0.5)',
                                     },
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     borderRadius: '8px',
                                 },
                                 '& .MuiInputLabel-root': {
-                                    color: 'rgba(255, 255, 255, 0.7)',
+                                    color: errors.message ? 'error.light' : 'rgba(255, 255, 255, 0.7)',
                                 },
                                 '& .MuiInputLabel-root.Mui-focused': {
-                                    color: 'rgba(255, 255, 255, 0.9)',
+                                    color: errors.message ? 'error.light' : 'rgba(255, 255, 255, 0.9)',
+                                },
+                                '& .MuiFormHelperText-root': {
+                                    color: errors.message ? 'error.light' : 'rgba(255, 255, 255, 0.5)',
                                 },
                             }}
                         />
