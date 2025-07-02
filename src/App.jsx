@@ -9,7 +9,6 @@ function App() {
       <CssBaseline />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* Add more routes here as needed */}
       </Routes>
     </Router>
   );
