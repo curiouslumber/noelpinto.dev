@@ -36,7 +36,7 @@ const Home = () => {
                     backgroundImage: `url(${bg})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    filter: 'brightness(0.7) saturate(1.2)',
+                    filter: 'brightness(0.6) saturate(1.2)',
                     zIndex: -1,
                 },
             }}
