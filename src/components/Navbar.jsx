@@ -141,7 +141,8 @@ const Navbar = () => {
           
           <Button 
             variant="contained" 
-            component={motion.button}
+            component={Link}
+            to="/contact"
             whileHover={{ 
               scale: 1.05,
               boxShadow: '0 10px 30px -5px rgba(255, 255, 255, 0.1)'
