@@ -1,5 +1,6 @@
 # Noel Pinto - Portfolio Website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aaebf8dd-9a74-4246-8dd9-175256455169/deploy-status)](https://app.netlify.com/projects/noelpintodev/deploys)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react)](https://reactjs.org/)
 [![MUI](https://img.shields.io/badge/Material--UI-5.14.20-0081CB?logo=mui)](https://mui.com/)
