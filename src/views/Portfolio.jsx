@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Box, Typography, Button, Grid, useMediaQuery, useTheme } from '@mui/material';
-import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import { Box, Typography, Button, Grid, useMediaQuery, useTheme, IconButton, Tooltip } from '@mui/material';
+import { ArrowBackIos, ArrowForwardIos, GitHub, Download } from '@mui/icons-material';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 import Navbar from '../components/Navbar';
@@ -18,29 +18,70 @@ const ProjectCard = React.memo(({ project, currentImageIndex, onImageChange }) =
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: ANIMATION_DURATION }}
     >
-      <Typography
-        component="h2"
-        variant="h4"
-        sx={{
-          color: 'white',
-          mb: 3,
-          fontWeight: 600,
-          background: 'linear-gradient(120deg, rgba(132, 250, 176, 0.9) 0%, rgba(143, 211, 244, 0.9) 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          textFillColor: 'transparent',
-          backgroundSize: '200% auto',
-          animation: 'gradient 8s ease infinite',
-          '@keyframes gradient': {
-            '0%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-            '100%': { backgroundPosition: '0% 50%' },
-          },
-        }}
-      >
-        {project.title}
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+        <Typography
+          component="h2"
+          variant="h4"
+          sx={{
+            color: 'white',
+            fontWeight: 600,
+            background: 'linear-gradient(120deg, rgba(132, 250, 176, 0.9) 0%, rgba(143, 211, 244, 0.9) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            textFillColor: 'transparent',
+            backgroundSize: '200% auto',
+            animation: 'gradient 8s ease infinite',
+            '@keyframes gradient': {
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' },
+            },
+          }}
+        >
+          {project.title}
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          {project.code && (
+            <Tooltip title="View on GitHub">
+              <IconButton 
+                href={project.code} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                sx={{
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  '&:hover': {
+                    color: 'rgba(132, 250, 176, 0.9)',
+                    transform: 'translateY(-2px)',
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                <GitHub />
+              </IconButton>
+            </Tooltip>
+          )}
+          {project.demo && (
+            <Tooltip title="Download App">
+              <IconButton 
+                href={project.demo} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                sx={{
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  '&:hover': {
+                    color: 'rgba(143, 211, 244, 0.9)',
+                    transform: 'translateY(-2px)',
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                <Download />
+              </IconButton>
+            </Tooltip>
+          )}
+        </Box>
+      </Box>
       <Typography
         variant="body1"
         sx={{
@@ -415,34 +456,55 @@ const Portfolio = () => {
                   flex: 1,
                 }}
               >
-                <Grid container spacing={4} sx={{ height: '100%', flex: 1 }}>
+                <Box sx={{ 
+                  display: 'flex', 
+                  flexDirection: isMobile ? 'column' : 'row',
+                  flex: 1,
+                  minHeight: 0,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
                   {/* Left Side - Project Info */}
-                  <Grid item xs={12} md={6}>
+                  <Box sx={{ 
+                    width: isMobile ? '100%' : '50%',
+                    pr: isMobile ? 0 : 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    overflowY: 'auto',
+                  }}>
                     <ProjectCard 
                       project={currentProject} 
                       currentImageIndex={currentImageIndex}
                       onImageChange={setCurrentImageIndex}
                     />
-                  </Grid>
+                    <Box sx={{ mt: 'auto', pt: 2 }}>
+                      <ProjectNavigation 
+                        currentIndex={currentProjectIndex}
+                        total={projects.length}
+                        onNext={nextProject}
+                        onPrev={prevProject}
+                      />
+                    </Box>
+                  </Box>
 
                   {/* Right Side - Project Preview */}
-                  <Grid item xs={12} md={6}>
+                  <Box sx={{ 
+                    width: isMobile ? '100%' : '50%',
+                    pl: isMobile ? 0 : 2,
+                    pt: isMobile ? 4 : 0,
+                    height: '100%',
+                    minHeight: isMobile ? '400px' : 'auto',
+                  }}>
                     <ProjectPreview 
                       project={currentProject} 
                       currentImageIndex={currentImageIndex}
                       onImageChange={setCurrentImageIndex}
                     />
-                  </Grid>
-                </Grid>
+                  </Box>
+                </Box>
               </motion.div>
             </AnimatePresence>
-
-            <ProjectNavigation 
-              currentIndex={currentProjectIndex}
-              total={projects.length}
-              onNext={nextProject}
-              onPrev={prevProject}
-            />
           </GlassBox>
         </motion.div>
       </Box>

@@ -1,11 +1,11 @@
 export const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard.',
-      tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      title: 'Planora',
+      description: 'A planning and task management app built with Flutter and Supabase.',
+      tags: ['Flutter', 'Firebase', 'Supabase', 'Unsplash'],
       demo: '#',
-      code: '#',
+      code: 'https://github.com/curiouslumber/Planora',
       images: [
         'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -14,11 +14,11 @@ export const projects = [
     },
     {
       id: 2,
-      title: 'Portfolio Website',
-      description: 'A modern portfolio website built with React and Tailwind CSS.',
-      tags: ['React', 'Tailwind CSS', 'Framer Motion'],
+      title: 'ChatXL',
+      description: 'A modern chatbot built with Flutter and Rasa AI.',
+      tags: ['Flutter', 'GCP', 'Rasa AI', 'Python'],
       demo: '#',
-      code: '#',
+      code: 'https://github.com/curiouslumber/ChatXL',
       images: [
         'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -27,11 +27,11 @@ export const projects = [
     },
     {
       id: 3,
-      title: 'Task Management App',
-      description: 'A task management app built with React and Tailwind CSS.',
-      tags: ['React', 'Tailwind CSS', 'Framer Motion'],
+      title: 'Ecostora',
+      description: 'A eco-friendly e-commerce platform built with Flutter and Supabase.',
+      tags: ['Flutter', 'Firebase', 'Supabase', 'Unsplash'],
       demo: '#',
-      code: '#',
+      code: 'https://github.com/curiouslumber/Ecostora',
       images: [
         'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
