@@ -111,8 +111,7 @@ const Home = () => {
                                 variant="contained"
                                 size="large"
                                 component="a"
-                                href="https://github.com/curiouslumber"
-                                target="_blank"
+                                onClick={() => navigate('/portfolio')}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 sx={{
