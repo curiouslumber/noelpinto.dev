@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, keyframes, useTheme, useMediaQuery, Avatar, Container, Divider } from "@mui/material";
+import { Box, Typography, keyframes, useTheme, useMediaQuery, Avatar, Container, Divider, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import bg from "../assets/images/background.jpg";
 import Navbar from "../components/Navbar";
@@ -79,28 +79,43 @@ const About = () => {
           <GlassBox
             sx={{
               p: isMobile ? 3 : 4,
-              mt: isMobile ? 4: null,
+              mt: isMobile ? 4 : 8,
               borderRadius: '20px',
               backdropFilter: 'blur(12px)',
+              background: 'rgba(255, 255, 255, 0.05)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+              '&:hover': {
+                boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+                transform: 'translateY(-2px)',
+              },
+              transition: 'all 0.3s ease',
             }}
           >
             <Box sx={{ mb: 4 }}>
               <Typography 
-                variant="h6"
+                variant="h4"
                 sx={{
-                  color: 'rgba(255, 255, 255, 0.9)',
-                  mb: 2,
-                  fontWeight: 500,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1,
+                  color: 'white',
+                  mb: 3,
+                  fontWeight: 600,
+                  background: 'linear-gradient(120deg, rgba(132, 250, 176, 0.9) 0%, rgba(143, 211, 244, 0.9) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  textFillColor: 'transparent',
+                  backgroundSize: '200% auto',
+                  animation: 'gradient 8s ease infinite',
+                  '@keyframes gradient': {
+                    '0%': { backgroundPosition: '0% 50%' },
+                    '50%': { backgroundPosition: '100% 50%' },
+                    '100%': { backgroundPosition: '0% 50%' },
+                  },
                 }}
               >
-                <Box component="span" sx={{ color: 'primary.main' }}>//</Box> My Journey
+                About Me
               </Typography>
-              
+              <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)', mb: 3 }} />
               <Typography 
                 variant="body1" 
                 sx={{
@@ -150,15 +165,23 @@ const About = () => {
               <Typography 
                 variant="h6"
                 sx={{
-                  color: 'rgba(255, 255, 255, 0.9)',
-                  mb: 2,
-                  fontWeight: 500,
+                  color: 'white',
+                  mb: 1,
                   display: 'flex',
                   alignItems: 'center',
                   gap: 1,
                 }}
               >
-                <Box component="span" sx={{ color: 'primary.main' }}>//</Box> What I Do
+                <Box 
+                  component="span" 
+                  sx={{ 
+                    width: '8px', 
+                    height: '8px', 
+                    borderRadius: '50%',
+                    background: 'linear-gradient(120deg, rgba(132, 250, 176, 0.9) 0%, rgba(143, 211, 244, 0.9) 100%)',
+                  }} 
+                />
+                What I Do
               </Typography>
               
               <Box 
