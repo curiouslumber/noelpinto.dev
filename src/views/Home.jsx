@@ -66,13 +66,37 @@ const Home = () => {
                         >
                             Hi, I'm{' '}
                             <Box
-                                component="span"
+                                component={motion.span}
+                                onClick={() => navigate('/about')}
                                 sx={{
+                                    position: 'relative',
+                                    cursor: 'pointer',
+                                    display: 'inline-block',
+                                    '&::after': {
+                                        content: '""',
+                                        position: 'absolute',
+                                        width: '100%',
+                                        height: '2px',
+                                        bottom: '0',
+                                        left: 0,
+                                        background: 'linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%)',
+                                        transform: 'scaleX(0)',
+                                        transformOrigin: 'right',
+                                        transition: 'transform 0.3s ease-in-out',
+                                    },
+                                    '&:hover::after': {
+                                        transform: 'scaleX(1)',
+                                        transformOrigin: 'left',
+                                    },
+                                    '&:active': {
+                                        transform: 'translateY(1px)',
+                                    },
                                     background: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)',
                                     WebkitBackgroundClip: 'text',
                                     WebkitTextFillColor: 'transparent',
                                     backgroundClip: 'text',
                                     textFillColor: 'transparent',
+                                    paddingBottom: '2px',
                                 }}
                             >
                                 Noel Pinto
