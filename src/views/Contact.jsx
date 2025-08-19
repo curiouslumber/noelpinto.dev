@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button, CircularProgress, Alert, Snackbar } from "@mui/material";
 import { motion } from "framer-motion";
-import bg from "../assets/images/background.jpg";
+import bg from "../assets/images/background_1.png";
 import Navbar from "../components/Navbar";
 import GlassBox from "../components/GlassBox";
 import ContactService from "../services/contactService";

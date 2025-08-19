@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Button, keyframes, Container } from "@mui/material";
 import { motion } from "framer-motion";
-import bg from "../assets/images/background.jpg";
+import bg from "../assets/images/background_1.png";
 import Navbar from "../components/Navbar";
 import GlassBox from "../components/GlassBox";
 import { Code, PhoneAndroid, Brush } from "@mui/icons-material";
@@ -113,7 +113,7 @@ const Home = () => {
                                 textShadow: '0 1px 5px rgba(0,0,0,0.2)',
                             }}
                         >
-                            Mobile App Developer (Flutter)
+                            Software Engineer (Mobile Apps)
                         </Typography>
 
                         <Typography
@@ -126,7 +126,7 @@ const Home = () => {
                                 lineHeight: 1.7,
                             }}
                         >
-                            Crafting beautiful, performant mobile experiences with Flutter.
+                            Crafting beautiful, performant mobile apps and web applications.
                             I transform ideas into elegant, user-friendly applications that people love to use.
                         </Typography>
 

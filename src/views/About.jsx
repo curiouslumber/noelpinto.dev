@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, keyframes, useTheme, useMediaQuery, Avatar, Container, Divider, Button } from "@mui/material";
 import { motion } from "framer-motion";
-import bg from "../assets/images/background.jpg";
+import bg from "../assets/images/background_1.png";
 import Navbar from "../components/Navbar";
 import GlassBox from "../components/GlassBox";
 

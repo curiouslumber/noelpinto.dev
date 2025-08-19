@@ -5,7 +5,7 @@ import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 import Navbar from '../components/Navbar';
 import GlassBox from '../components/GlassBox';
-import bg from '../assets/images/background.jpg';
+import bg from '../assets/images/background_1.png';
 import { projects } from '../data/projects';
 
 const ANIMATION_DURATION = 0.3;
@@ -61,7 +61,7 @@ const ProjectCard = React.memo(({ project, currentImageIndex, onImageChange }) =
               </IconButton>
             </Tooltip>
           )}
-          {project.demo && (
+          {/* {project.demo && (
             <Tooltip title="Download App">
               <IconButton 
                 href={project.demo} 
@@ -79,7 +79,7 @@ const ProjectCard = React.memo(({ project, currentImageIndex, onImageChange }) =
                 <Download />
               </IconButton>
             </Tooltip>
-          )}
+          )} */}
         </Box>
       </Box>
       <Typography
@@ -489,7 +489,7 @@ const Portfolio = () => {
                   </Box>
 
                   {/* Right Side - Project Preview */}
-                  <Box sx={{ 
+                  {/* <Box sx={{ 
                     width: isMobile ? '100%' : '50%',
                     pl: isMobile ? 0 : 2,
                     pt: isMobile ? 4 : 0,
@@ -501,7 +501,7 @@ const Portfolio = () => {
                       currentImageIndex={currentImageIndex}
                       onImageChange={setCurrentImageIndex}
                     />
-                  </Box>
+                  </Box> */}
                 </Box>
               </motion.div>
             </AnimatePresence>
