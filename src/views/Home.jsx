@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Button, keyframes, Container } from "@mui/material";
 import { motion } from "framer-motion";
-import bg from "../assets/images/background_1.png";
+import bg from "../assets/images/background_1.webp";
 import Navbar from "../components/Navbar";
 import GlassBox from "../components/GlassBox";
 import { Code, PhoneAndroid, Brush } from "@mui/icons-material";

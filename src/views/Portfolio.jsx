@@ -5,7 +5,7 @@ import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 import Navbar from '../components/Navbar';
 import GlassBox from '../components/GlassBox';
-import bg from '../assets/images/background_1.png';
+import bg from '../assets/images/background_1.webp';
 import { projects } from '../data/projects';
 
 const ANIMATION_DURATION = 0.3;
